@@ -2,6 +2,8 @@ import React, { Dispatch, SetStateAction, useEffect, useState } from 'react'
 import data from '../data/data.json'
 import { Job } from '../types/types'
 
+// import logos from '../assets/manage.svg'
+
 interface Props {
   arrayOfFilters: string[]
   setArrayOfFilters: Dispatch<SetStateAction<string[]>>
@@ -15,7 +17,7 @@ export const JobCard = ({ arrayOfFilters, setArrayOfFilters } : Props) => {
   }, [])
 
   return (
-    <>
+    <section className=''>
       {
         cardData
           .filter(job => {
@@ -23,9 +25,10 @@ export const JobCard = ({ arrayOfFilters, setArrayOfFilters } : Props) => {
             return arrayOfFilters.every(filter => tags.includes(filter))
           })
           .map(job => {
-            const { id, company, role, position, postedAt, contract, location, tools, level, languages } = job
+            const { id, company, role, position, postedAt, contract, location, tools, level, languages, logo } = job
             return (
-              <article key={id} className='p-3 mt-5 shadow-md'>
+              <article key={id} className='p-3 mt-5 shadow-lg'>
+                <img width={50} src={logo} alt='logo' className='absolute top-0'/>
                 <p className='inline mr-3 font-bold text-teal-600'>{company}</p>
                 {
                   job.new &&
@@ -46,7 +49,10 @@ export const JobCard = ({ arrayOfFilters, setArrayOfFilters } : Props) => {
                 <div className='flex flex-wrap gap-2 pt-3 font-bold text-teal-600' >
                   <span
                     className='p-1 bg-teal-50 cursor-pointer'
-                    onClick={() => setArrayOfFilters(prevFilters => [...prevFilters, role])}
+                    // onClick={() => setArrayOfFilters(prevFilters => [...prevFilters, role])}
+                    onClick={() => setArrayOfFilters(prevFilters => prevFilters.indexOf(role) === -1
+                      ? [...prevFilters, role]
+                      : [...prevFilters])}
                   >{role}</span>
                   {
                     tools
@@ -54,18 +60,27 @@ export const JobCard = ({ arrayOfFilters, setArrayOfFilters } : Props) => {
                         <span
                           key={tool}
                           className='p-1 bg-teal-50 cursor-pointer'
-                          onClick={() => setArrayOfFilters(prevFilters => [...prevFilters, tool])}
+                          onClick={() => setArrayOfFilters(prevFilters => prevFilters.indexOf(tool) === -1
+                            ? [...prevFilters, tool]
+                            : [...prevFilters])}
                         >
                           {tool}
                         </span>))
                   }
                   <span
                     className='p-1 bg-teal-50 cursor-pointer'
-                    onClick={() => setArrayOfFilters(prevFilters => [...prevFilters, level])}
+                    onClick={() => setArrayOfFilters(prevFilters => prevFilters.indexOf(level) === -1
+                      ? [...prevFilters, level]
+                      : [...prevFilters])}
                   >{level}</span>
                   {
                     languages
-                      .map(lang => <span onClick={() => setArrayOfFilters(prevFilters => [...prevFilters, lang])} key={lang} className='p-1 bg-teal-50 cursor-pointer'>{lang}</span>)
+                      .map(lang =>
+                        <span
+                          onClick= {() => setArrayOfFilters(prevFilters => prevFilters.indexOf(lang) === -1
+                            ? [...prevFilters, lang]
+                            : [...prevFilters])} key={lang} className='p-1 bg-teal-50 cursor-pointer'>{lang}
+                        </span>)
                   }
                 </div>
               </article>
@@ -73,6 +88,6 @@ export const JobCard = ({ arrayOfFilters, setArrayOfFilters } : Props) => {
           }
           )
       }
-    </>
+    </section>
   )
 }
