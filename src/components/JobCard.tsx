@@ -44,7 +44,10 @@ export const JobCard = ({ arrayOfFilters, setArrayOfFilters } : Props) => {
                   <span className='text-gray-500'>{location}</span>
                 </div>
                 <div className='flex flex-wrap gap-2 pt-3 font-bold text-teal-600' >
-                  <span className='p-1 bg-teal-50 cursor-pointer'>{role}</span>
+                  <span
+                    className='p-1 bg-teal-50 cursor-pointer'
+                    onClick={() => setArrayOfFilters(prevFilters => [...prevFilters, role])}
+                  >{role}</span>
                   {
                     tools
                       .map(tool => (
@@ -56,10 +59,13 @@ export const JobCard = ({ arrayOfFilters, setArrayOfFilters } : Props) => {
                           {tool}
                         </span>))
                   }
-                  <span className='p-1 bg-teal-50 cursor-pointer'>{level}</span>
+                  <span
+                    className='p-1 bg-teal-50 cursor-pointer'
+                    onClick={() => setArrayOfFilters(prevFilters => [...prevFilters, level])}
+                  >{level}</span>
                   {
                     languages
-                      .map(lang => <span key={lang} className='p-1 bg-teal-50 cursor-pointer'>{lang}</span>)
+                      .map(lang => <span onClick={() => setArrayOfFilters(prevFilters => [...prevFilters, lang])} key={lang} className='p-1 bg-teal-50 cursor-pointer'>{lang}</span>)
                   }
                 </div>
               </article>
