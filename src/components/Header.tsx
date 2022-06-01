@@ -1,7 +1,7 @@
 import React from 'react'
 
-import heroMobile from '../assets/bg-header-mobile.svg'
-import heroDesktop from '../assets/bg-header-desktop.svg'
+import heroMobile from '../../public/assets/bg-header-mobile.svg'
+import heroDesktop from '../../public/assets/bg-header-desktop.svg'
 
 export const Header = () => {
   return (

@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { JobCard } from './JobCard'
-import cross from '../assets/icon-remove.svg'
+import cross from '../../public/assets/icon-remove.svg'
 
 export const JobList = () => {
   const [arrayOfFilters, setArrayOfFilters] = useState<string[]>([])
